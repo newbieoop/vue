@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="box">
+			<p v-if="isCreated">我是1111</p>
+			<p v-else>我是00000</p>
+			<div v-if="isCreated">hello!!!</div>
+		
+		    <!-- 包装元素,最终的渲染结果不会包含<template>元素。在<template>中配合v-if条件渲染一整组 -->
+			<template v-if="isCreated">
+				<div >hello!!!</div>
+				<div >hello!!!</div>
+				<div >hello!!!</div>
+				<div >hello!!!</div>
+			</template>	
+			
+			
+			<p v-show="isShow">哈哈哈哈哈哈</p>
+		</div>
+		<script type="text/javascript">
+			
+			var vm = new Vue({
+				el:'#box',
+				
+				data:{
+					
+					isCreated:true,
+					isShow:true
+				}
+			})
+			
+		</script>
+	</body>
+</html>

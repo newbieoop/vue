@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+		
+	</head>
+	<body>
+		<div id="box">
+			
+		<!--<ul> -->
+				<!-- 
+				<li v-for="data in datalist">
+					{{data}}
+				</li>
+				 -->
+				<!-- 可以将索引遍历出来 -->
+				<!--
+				 <li v-for="(data,index) in datalist">
+					{{data}}--{{index}}
+					
+				</li> 
+				-->
+				<!-- in 可以用of 代替 key 跟踪每个节点的身份，从而重用和重新排序现有元素-->
+				<!-- <li v-for="(data,index) of datalist" :key='index'>
+					{{data}}--{{index}}
+					
+				</li>
+			</ul> -->
+			<!-- 计算属性显示过滤结果 -->
+			<input type="text" v-model="mytext"/>
+			<ul>
+				<li v-for="data in computeddatalist">{{data}}</li>
+			</ul>
+			
+		</div>
+		<script type="text/javascript">
+			
+			var vm = new Vue({
+				
+				el:'#box',
+				
+				data:{
+					
+					datalist:["aaa","bab","bbb","ccc","ddd"],
+					mytext:""
+				},
+				
+				computed:{
+					computeddatalist:function(){
+						
+						return this.datalist.filter(item=>item.indexOf(this.mytext)>-1)
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

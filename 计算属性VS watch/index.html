@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="box">
+			<!-- v-model 双向数据绑定指令 通过改变price的值,v-model中的price也改变，反之也可！-->
+			<p>单价 : <input type="text" v-model="price"/></p>
+			{{price}}
+			<p>数量 : <input type="text" v-model="number"/></p>
+			{{number}}
+			<p>总额 : <span>{{sum}}</span></p>
+			<p>计算属性的总额 : {{computedsum}}</p>
+		</div>
+		
+		<script type="text/javascript">
+			
+			var vm = new Vue({
+				
+				el:'#box',
+				
+				data:{
+					
+					price:100,
+					number:20,
+					sum:0
+				},
+				watch:{
+					price:function(newvalue){
+						this.sum = newvalue*this.number
+					},
+					number:function(newvalue){
+						this.sum = newvalue*this.price
+					}
+				},
+				computed:{
+					computedsum:function(){
+						
+						return this.number*this.price
+						
+					}
+				}
+				
+					
+				
+			})
+		
+		</script>
+	</body>
+</html>
+

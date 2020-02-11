@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+		
+	</head>
+	<body>
+		<div id="box">
+			<button @click="count = count - 1">-</button>
+			
+			<p>{{count}}</p>
+			
+			<button @click="count = count + 1">+</button>
+			
+			<p>{{name}}</p>
+			
+			<button @click="handleclick">click</button>
+			
+			<button @click="handleclick2('111','222')">click2</button>
+			
+			<ul @click="uC">
+				<!-- .stop 阻止冒泡 .prevent阻止默认行为。修饰符可以串联使用-->
+				<li @click.stop="hC">111</li>
+				<li>222</li>
+				<li>333</li>
+			</ul>
+			<!-- .enter 按下回车才打印内容  不用判断keycode-->
+			<input type="text" @keyup.enter="up"/>
+		</div>
+		<script type="text/javascript">
+			
+			var vm = new Vue({
+				
+				el:"#box",
+				
+				data:{
+					count:1,
+					name:"xiaoming"
+				},
+				
+				methods:{
+					handleclick(ev){
+						this.name="aaaaaaaaa";
+						console.log(ev.target)
+					},
+					handleclick2(data1,data2){
+						
+						console.log(data1);
+						console.log(data2)
+					},
+			
+					hC(ev){
+						console.log("li");
+						// ev.stopPropagation()
+					},
+					uC(){
+						console.log("ul")
+					},
+					
+					up(ev){
+						// console.log(ev.target.value);
+						// if(ev.keyCode==13){
+							console.log(ev.target.value)
+						// }
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

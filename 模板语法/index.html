@@ -1,0 +1,92 @@
+<!-- 
+ 模板语法
+	(1)插值
+		a.文本 {{}}
+		b.纯HTML
+			v-html 防止XSS
+		c.表达式
+ 
+	(2)指令：是带有v-前缀的特殊属性
+		v-bind
+		v-if
+		v-on:click
+ 
+	(3)缩写
+		v-bind:src  => :src
+		v-on:click => @click
+ 
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Vue 使用unpkg  CDN方法</title>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+	<body>
+		<div id="box">
+			
+			<!-- 双大括号会将数据解释为普通文本 -->
+			{{name}}
+			<!-- v-html输出真正的HTML，而非HTML代码。 -->
+			<p v-html="name"></p>
+			
+			<span>{{age}}</span>
+			
+			<p>{{10+20}}</p>
+			<p>{{10>20?'大于':'小于'}}</p>
+			<p>{{age+'xiaomong的年龄'}}</p>
+			<!-- 通过改变isShow的真假可以创建和删除该元素 可在控制台修改-->
+			<p v-if="isShow">我是动态创建和删除</p>
+			<!-- 通过改变isShow的真假可以隐藏和显示该元素 可在控制台修改-->
+			<p v-show="isShow">我是动态隐藏和显示</p>
+			
+			<!-- <button v-on:click="handleClick">click</button> -->
+			<!-- v-on:可省略，写成@ -->
+			<button @click="handleClick">click</button>
+			
+			<!-- v-bind可以使属性写三目运算符  v-bind:可简写 : -->
+			<!-- <p v-bind:class="isShow?'aaa':'bbb'"></p> -->
+			<p :class="isShow?'aaa':'bbb'"></p>
+			
+			
+		</div>
+
+		<script type="text/javascript">
+			//第一种方法
+			/*
+			new Vue({
+				el:'#box',
+				
+				data:{
+					name:"xiaomong",  //插值  1、文本
+					age:18
+				}
+			})
+			*/
+			//  方法二、响应式渲染，，可在控制台通过 vm.属性 查看属性的值，也可以改变该属性的值。
+				var vm = new Vue({
+				el:'#box',
+				
+				data:{
+					// name:"xiaomong",
+					name:"<b>小明</b>",  //2、纯HTML
+					age:18,
+					isShow:true
+				},
+				
+				methods:{
+						
+					handleClick:function(){
+						
+						// console.log(11);
+						
+						this.name='aaaaa';
+						this.isShow=false;
+					}
+					
+				}
+			})
+		</script>
+</body>
+</html>

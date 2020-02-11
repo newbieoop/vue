@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="box">
+			{{name.substring(0,1).toUpperCase()+name.substring(1)}}
+			<!-- 计算属性调用方法如果所依赖的属性没有改变，那么该方法只调用一次。所以计算属性更加高效！ -->
+			<p>我是计算属性{{changword}}</p>
+			<p>我是计算属性{{changword}}</p>
+			
+			<!-- 普通方法会多次调用 -->
+			<p>我是普通方法{{changwordMethod()}}</p>
+			<p>我是普通方法{{changwordMethod()}}</p>
+			
+		</div>
+		
+		<script type="text/javascript">
+			
+			var vm = new Vue({
+				
+				el:'#box',
+				
+				data:{
+					
+					name:'xiaoming'
+					
+				},
+				
+					
+				methods:{
+						
+					changwordMethod:function(){
+						
+						console.log('普通方法');
+						
+						return this.name.substring(0,1).toUpperCase()+this.name.substring(1)
+							
+					}
+			
+				},
+				computed:{
+					
+					changword:function(){
+						
+						console.log('计算属性');
+						
+						return this.name.substring(0,1).toUpperCase()+this.name.substring(1)
+					}
+				}
+				
+			})
+		
+		</script>
+	</body>
+</html>
